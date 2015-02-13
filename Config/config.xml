@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+
+    <services>
+
+        <service id="recently.viewed.manager" class="RecentlyViewed\Service\RecentlyViewedManager" scope="request">
+            <argument type="service" id="request"/>
+        </service>
+
+        <service id="recently.viewed.smarty.plugin" class="RecentlyViewed\Smarty\Plugins\RecentlyViewed" scope="request">
+            <argument type="service" id="recently.viewed.manager"/>
+            <tag name="thelia.parser.register_plugin"/>
+        </service>
+
+        <service id="recently.viewed.manager" class="RecentlyViewed\Service\RecentlyViewedManager" scope="request">
+            <argument type="service" id="request"/>
+        </service>
+
+        <service id="recently.viewed.register" class="RecentlyViewed\EventListeners\Registration" scope="request">
+            <argument type="service" id="recently.viewed.manager"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+    </services>
+
+    <loops>
+        <loop name="recentlyviewed" class="RecentlyViewed\Loop\ProductRecentlyViewedLoop" />
+    </loops>
+
+</config>

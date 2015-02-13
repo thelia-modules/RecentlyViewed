@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <fullnamespace>RecentlyViewed\RecentlyViewed</fullnamespace>
+    <descriptive locale="en_US">
+        <title>Recently viewed products</title>
+    </descriptive>
+    <descriptive locale="fr_FR">
+        <title>Produits récemment consultés</title>
+    </descriptive>
+    <version>1.0</version>
+    <author>
+        <name>Alban Baixas</name>
+        <email>abaixas@openstudio.fr</email>
+    </author>
+    <type>classic</type>
+    <thelia>2.1.0</thelia>
+    <stability>other</stability>
+</module>
