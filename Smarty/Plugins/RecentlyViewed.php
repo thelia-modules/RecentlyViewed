@@ -49,7 +49,10 @@ class RecentlyViewed extends AbstractSmartyPlugin
             $productId = null;
         }
 
-        $recentlyViewed = $this->recentlyViewedManager->getRecentlyViewed($productId);
+        if (null === $recentlyViewed = $this->recentlyViewedManager->getRecentlyViewed($productId)) {
+
+            return '';
+        }
 
         return implode(',', $recentlyViewed);
     }

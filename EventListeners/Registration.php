@@ -26,7 +26,7 @@ class Registration implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return [KernelEvents::CONTROLLER => ['register',35]];
+        return [KernelEvents::CONTROLLER => ['register', 35]];
     }
 
     /**
@@ -40,12 +40,15 @@ class Registration implements EventSubscriberInterface
     public function register(FilterControllerEvent $event)
     {
         if ('product' !== $view = $event->getRequest()->get('view')) {
+
             return $event;
         }
 
         if (null !== $productId = $event->getRequest()->get('product_id')) {
+
             $this->recentlyViewedManager->add($productId);
         }
+
         return $event;
     }
 }

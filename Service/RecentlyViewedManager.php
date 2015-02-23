@@ -120,7 +120,9 @@ class RecentlyViewedManager
      */
     protected function extractProduct($productId)
     {
-        unset($this->recentlyViewed[array_search($productId, $this->recentlyViewed)]);
+        if ($this->recentlyViewed !== null) {
+            unset($this->recentlyViewed[array_search($productId, $this->recentlyViewed)]);
+        }
 
         return $this->recentlyViewed;
     }
