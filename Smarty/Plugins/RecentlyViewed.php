@@ -42,15 +42,12 @@ class RecentlyViewed extends AbstractSmartyPlugin
     public function getRecentlyViewed($productId)
     {
         if (isset($productId['productId'])) {
-
             $productId = $productId['productId'];
         } else {
-
             $productId = null;
         }
 
         if (null === $recentlyViewed = $this->recentlyViewedManager->getRecentlyViewed($productId)) {
-
             return '';
         }
 

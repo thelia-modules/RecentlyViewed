@@ -40,12 +40,10 @@ class Registration implements EventSubscriberInterface
     public function register(FilterControllerEvent $event)
     {
         if ('product' !== $view = $event->getRequest()->get('view')) {
-
             return $event;
         }
 
         if (null !== $productId = $event->getRequest()->get('product_id')) {
-
             $this->recentlyViewedManager->add($productId);
         }
 

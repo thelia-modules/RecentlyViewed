@@ -9,6 +9,12 @@ Show recently viewed products.
 * Copy the module into ```<thelia_root>/local/modules/RecentlyViewed``` directory and be sure that the name of the module is RecentlyViewed.
 * Activate it in your thelia administration panel
 
+### Composer
+
+```
+$ composer require thelia/recently-viewed-module:~1.0
+```
+
 ## Usage
 
 To use recently viewed products you can use Smarty function or Loop
@@ -19,7 +25,9 @@ You can modify maximum value in RecentlyViewed.php (default value : 8)
 
 exemple :
 
+```
 {get_recently_viewed productId=$product_id}
+```
 
 result : "2,18,19,65"
 
@@ -29,7 +37,7 @@ recentlyviewed
 
 this loop extends default Product Loop.
 
-@see : http://doc.thelia.net/en/documentation/loop/product.html
+**@see** : http://doc.thelia.net/en/documentation/loop/product.html
 
 
 ### Input arguments
