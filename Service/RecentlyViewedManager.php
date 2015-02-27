@@ -39,22 +39,18 @@ class RecentlyViewedManager
     public function add($productId)
     {
         if ($productId === null) {
-
             return false;
         }
 
         if (null === $recentlyViewed = $this->getRecentlyViewed()) {
-
             return $this->save($productId);
         }
 
         if ($this->isAlreadyRegister($productId)) {
-
             return false;
         }
 
         if (count($recentlyViewed) <= RecentlyViewed::MAX) {
-
             return $this->save($productId);
         }
 
@@ -71,7 +67,6 @@ class RecentlyViewedManager
     public function getRecentlyViewed($productId = null)
     {
         if ($productId === null) {
-
             return $this->recentlyViewed;
         }
 
@@ -88,9 +83,7 @@ class RecentlyViewedManager
         $recentlyViewed = $this->getRecentlyViewed();
 
         foreach ($recentlyViewed as $value) {
-
             if ($value === $productId) {
-
                 return true;
             }
         }
