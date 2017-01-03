@@ -7,12 +7,12 @@
     <descriptive locale="fr_FR">
         <title>Produits récemment consultés</title>
     </descriptive>
-    <version>1.0</version>
+    <version>1.1</version>
     <author>
         <name>Alban Baixas</name>
         <email>abaixas@openstudio.fr</email>
     </author>
     <type>classic</type>
     <thelia>2.1.0</thelia>
-    <stability>other</stability>
+    <stability>beta</stability>
 </module>
