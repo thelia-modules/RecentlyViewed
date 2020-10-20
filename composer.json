@@ -1,5 +1,6 @@
 {
   "name": "thelia/recently-viewed-module",
+  "description": "Show recently viewed products.",
   "license": "LGPL-3.0+",
   "type": "thelia-module",
   "require": {
