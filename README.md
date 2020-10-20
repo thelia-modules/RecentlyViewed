@@ -12,7 +12,7 @@ Show recently viewed products.
 ### Composer
 
 ```
-$ composer require thelia/recently-viewed-module:~1.0
+$ composer require thelia/recently-viewed-module ~1.2.0
 ```
 
 ## Usage
