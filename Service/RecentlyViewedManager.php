@@ -28,7 +28,10 @@ class RecentlyViewedManager
     public function __construct(Request $request)
     {
         $this->session = $request->getSession();
-        $this->recentlyViewed = $this->session->get('recentlyviewed');
+        if($this->session)
+        {
+            $this->recentlyViewed = $this->session->get('recentlyviewed');
+        }
     }
 
     /**
