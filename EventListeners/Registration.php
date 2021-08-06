@@ -4,7 +4,7 @@ namespace RecentlyViewed\EventListeners;
 
 use RecentlyViewed\Service\RecentlyViewedManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -32,12 +32,12 @@ class Registration implements EventSubscriberInterface
     /**
      * @param $recentlyViewedManager
      */
-    public function __construct($recentlyViewedManager)
+    public function __construct(RecentlyViewedManager $recentlyViewedManager)
     {
         $this->recentlyViewedManager = $recentlyViewedManager;
     }
 
-    public function register(FilterControllerEvent $event)
+    public function register(ControllerEvent $event)
     {
         if (('product' === $event->getRequest()->get('view') || 'product' === $event->getRequest()->get('_view'))
             && null !== $productId = $event->getRequest()->get('product_id')

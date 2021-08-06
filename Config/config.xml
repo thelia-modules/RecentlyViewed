@@ -5,29 +5,11 @@
         xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
 
     <services>
-
-        <service id="recently.viewed.manager" class="RecentlyViewed\Service\RecentlyViewedManager" scope="request">
-            <argument type="service" id="request"/>
-        </service>
-
-        <service id="recently.viewed.smarty.plugin" class="RecentlyViewed\Smarty\Plugins\RecentlyViewed" scope="request">
-            <argument type="service" id="recently.viewed.manager"/>
-            <tag name="thelia.parser.register_plugin"/>
-        </service>
-
-        <service id="recently.viewed.manager" class="RecentlyViewed\Service\RecentlyViewedManager" scope="request">
-            <argument type="service" id="request"/>
-        </service>
-
-        <service id="recently.viewed.register" class="RecentlyViewed\EventListeners\Registration" scope="request">
-            <argument type="service" id="recently.viewed.manager"/>
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
+        <service id="recently.viewed.manager" alias="RecentlyViewed\Service\RecentlyViewedManager" public="true"/>
     </services>
 
     <loops>
-        <loop name="recentlyviewed" class="RecentlyViewed\Loop\ProductRecentlyViewedLoop" />
+        <loop name="recentlyviewed" class="RecentlyViewed\Loop\ProductRecentlyViewedLoop"/>
     </loops>
 
 </config>
