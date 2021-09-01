@@ -18,9 +18,10 @@ class RecentlyViewed extends AbstractSmartyPlugin
     protected $recentlyViewedManager;
 
     /**
-     * @param $recentlyViewedManager
+     * RecentlyViewed constructor.
+     * @param RecentlyViewedManager $recentlyViewedManager
      */
-    public function __construct($recentlyViewedManager)
+    public function __construct(RecentlyViewedManager $recentlyViewedManager)
     {
         $this->recentlyViewedManager = $recentlyViewedManager;
     }

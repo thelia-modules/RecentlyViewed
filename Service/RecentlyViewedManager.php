@@ -3,6 +3,7 @@
 namespace RecentlyViewed\Service;
 
 use RecentlyViewed\RecentlyViewed;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Thelia\Core\HttpFoundation\Request;
 
@@ -25,9 +26,9 @@ class RecentlyViewedManager
     /**
      * @param Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->session = $request->getSession();
+        $this->session = $requestStack->getSession();
         if($this->session)
         {
             $this->recentlyViewed = $this->session->get('recentlyviewed');
