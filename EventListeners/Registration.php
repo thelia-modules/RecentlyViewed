@@ -11,12 +11,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Class Registration
  *
  * @package RecentlyViewed\EventListeners
- * @author Baixas Alban <abaixas@openstudio.fr>
+ * @author  Baixas Alban <abaixas@openstudio.fr>
  */
 class Registration implements EventSubscriberInterface
 {
 
-    /** @var RecentlyViewedManager  */
+    /** @var RecentlyViewedManager */
     protected $recentlyViewedManager;
 
     /**
@@ -42,7 +42,7 @@ class Registration implements EventSubscriberInterface
         if (('product' === $event->getRequest()->get('view') || 'product' === $event->getRequest()->get('_view'))
             && null !== $productId = $event->getRequest()->get('product_id')
         ) {
-            $this->recentlyViewedManager->add($productId);
+            $this->recentlyViewedManager->add($productId, $event->getRequest());
         }
     }
 }

@@ -3,50 +3,34 @@
 namespace RecentlyViewed\Service;
 
 use RecentlyViewed\RecentlyViewed;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Thelia\Core\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 /**
  * Class RecentlyViewedManager
  *
  * @package RecentlyViewed\Service
- * @author Baixas Alban <abaixas@openstudio.fr>
+ * @author  Baixas Alban <abaixas@openstudio.fr>
  */
 class RecentlyViewedManager
 {
-    const SERVICE_ID = 'recently.viewed.manager';
+    const RECENTLY_VIEWED_SESSION_NAME = 'recentlyviewed';
 
-    /** @var  Session */
-    protected $session;
-
-    /** @var  array */
-    protected $recentlyViewed;
-
-    /**
-     * @param Request $request
-     */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(protected Request $request)
     {
-        $this->session = $requestStack->getSession();
-        if($this->session)
-        {
-            $this->recentlyViewed = $this->session->get('recentlyviewed');
-        }
     }
 
     /**
      * add a product in recently viewed
-     * @param $productId
-     * @return bool
      */
-    public function add($productId)
+    public function add($productId): bool
     {
         if ($productId === null) {
             return false;
         }
-
-        if (null === $recentlyViewed = $this->getRecentlyViewed()) {
+        
+        $recentlyViewed = $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
+        if (null === $recentlyViewed) {
             return $this->save($productId);
         }
 
@@ -71,7 +55,7 @@ class RecentlyViewedManager
     public function getRecentlyViewed($productId = null)
     {
         if ($productId === null) {
-            return $this->recentlyViewed;
+            return $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
         }
 
         return $this->extractProduct($productId);
@@ -91,6 +75,7 @@ class RecentlyViewedManager
                 return true;
             }
         }
+
         return false;
     }
 
@@ -117,11 +102,12 @@ class RecentlyViewedManager
      */
     protected function extractProduct($productId)
     {
-        if ($this->recentlyViewed !== null) {
-            unset($this->recentlyViewed[array_search($productId, $this->recentlyViewed)]);
+        $recentlyViewed = $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
+        if ($recentlyViewed !== null) {
+            unset($recentlyViewed[array_search($productId, $recentlyViewed)]);
         }
 
-        return $this->recentlyViewed;
+        return $recentlyViewed;
     }
 
     /**
@@ -130,8 +116,9 @@ class RecentlyViewedManager
      */
     protected function setRecentlyViewed($recentlyViewed)
     {
-        $this->session->set('recentlyviewed', $recentlyViewed);
+        $this->request->getSession()->set(self::RECENTLY_VIEWED_SESSION_NAME, $recentlyViewed);
 
         return $this;
     }
+
 }
