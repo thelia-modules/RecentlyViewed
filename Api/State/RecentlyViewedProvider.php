@@ -22,8 +22,11 @@ readonly class RecentlyViewedProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         $productIds = $this->recentlyViewedManager->getRecentlyViewed();
-        $cids       = implode(',', $productIds);
-        $query      = ProductQuery::create()->filterById($productIds);
+        if (!$productIds) {
+            return [];
+        }
+        $cids  = implode(',', $productIds);
+        $query = ProductQuery::create()->filterById($productIds);
 
         if ($context['filters']['itemsPerPage']) {
             $query->limit($context['filters']['itemsPerPage']);
