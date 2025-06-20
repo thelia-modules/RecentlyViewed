@@ -25,7 +25,7 @@ class ProductRecentlyViewedLoop extends ProductLoop
     /**
      * @return ArgumentCollection
      */
-    protected function getArgDefinitions()
+    protected function getArgDefinitions(): ArgumentCollection
     {
         /** @var ArgumentCollection $argumentCollection */
         $argumentCollection = parent::getArgDefinitions();
