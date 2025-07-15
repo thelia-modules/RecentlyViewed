@@ -3,6 +3,7 @@
 namespace RecentlyViewed\Loop;
 
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\ActiveQuery\ModelCriteria;
 use RecentlyViewed\Service\RecentlyViewedManager;
 use Thelia\Core\Template\Loop\Argument\Argument;
 use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
@@ -38,7 +39,7 @@ class ProductRecentlyViewedLoop extends ProductLoop
     /**
      * @return ProductQuery
      */
-    public function buildModelCriteria()
+    public function buildModelCriteria(): ModelCriteria|ProductQuery
     {
         /** @var ProductQuery $search */
         $search = parent::buildModelCriteria();
