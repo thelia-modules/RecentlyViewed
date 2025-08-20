@@ -3,6 +3,7 @@
 namespace RecentlyViewed\Service;
 
 use RecentlyViewed\RecentlyViewed;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Thelia\Core\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
@@ -16,7 +17,9 @@ class RecentlyViewedManager
 {
     const RECENTLY_VIEWED_SESSION_NAME = 'recentlyviewed';
 
-    public function __construct(protected Request $request)
+    public function __construct(
+        protected RequestStack $requestStack
+    )
     {
     }
 
@@ -28,8 +31,8 @@ class RecentlyViewedManager
         if ($productId === null) {
             return false;
         }
-        
-        $recentlyViewed = $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
+
+        $recentlyViewed = $this->getRequest()->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
         if (null === $recentlyViewed) {
             return $this->save($productId);
         }
@@ -55,7 +58,7 @@ class RecentlyViewedManager
     public function getRecentlyViewed($productId = null)
     {
         if ($productId === null) {
-            return $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
+            return $this->getRequest()->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
         }
 
         return $this->extractProduct($productId);
@@ -102,7 +105,7 @@ class RecentlyViewedManager
      */
     protected function extractProduct($productId)
     {
-        $recentlyViewed = $this->request->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
+        $recentlyViewed = $this->getRequest()->getSession()->get(self::RECENTLY_VIEWED_SESSION_NAME);
         if ($recentlyViewed !== null) {
             unset($recentlyViewed[array_search($productId, $recentlyViewed)]);
         }
@@ -116,9 +119,14 @@ class RecentlyViewedManager
      */
     protected function setRecentlyViewed($recentlyViewed)
     {
-        $this->request->getSession()->set(self::RECENTLY_VIEWED_SESSION_NAME, $recentlyViewed);
+        $this->getRequest()->getSession()->set(self::RECENTLY_VIEWED_SESSION_NAME, $recentlyViewed);
 
         return $this;
+    }
+
+    protected function getRequest(): Request
+    {
+        return $this->requestStack->getCurrentRequest();
     }
 
 }
