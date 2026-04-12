@@ -29,7 +29,7 @@ class RecentlyViewed extends AbstractSmartyPlugin
     /**
      * @return array of SmartyPluginDescriptor
      */
-    public function getPluginDescriptors()
+    public function getPluginDescriptors(): array
     {
         return [
             new SmartyPluginDescriptor("function", "get_recently_viewed", $this, "getRecentlyViewed"),
