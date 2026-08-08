@@ -13,6 +13,6 @@
     <email>abaixas@openstudio.fr</email>
   </author>
   <type>classic</type>
-  <thelia>2.5.0</thelia>
-  <stability>beta</stability>
+  <thelia>3.0.0</thelia>
+  <stability>prod</stability>
 </module>
