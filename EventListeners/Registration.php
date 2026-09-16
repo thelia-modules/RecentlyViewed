@@ -39,10 +39,14 @@ class Registration implements EventSubscriberInterface
 
     public function register(ControllerEvent $event)
     {
-        if (('product' === $event->getRequest()->get('view') || 'product' === $event->getRequest()->get('_view'))
-            && null !== $productId = $event->getRequest()->get('product_id')
+        $request = $event->getRequest();
+        $view = $request->attributes->get('view') ?? $request->query->get('view');
+        $productId = $request->attributes->get('product_id') ?? $request->query->get('product_id');
+
+        if (('product' === $view || 'product' === $request->attributes->get('_view'))
+            && null !== $productId
         ) {
-            $this->recentlyViewedManager->add($productId, $event->getRequest());
+            $this->recentlyViewedManager->add($productId, $request);
         }
     }
 }

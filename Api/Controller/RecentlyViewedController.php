@@ -25,7 +25,7 @@ readonly class RecentlyViewedController
         $productIds = $this->recentlyViewedManager->getRecentlyViewed();
 
         $products      = ProductQuery::create()->filterById($productIds)->find();
-        $operation     = $request->get('_api_operation');
+        $operation     = $request->attributes->get('_api_operation');
         $productModels = [];
         foreach ($products as $product) {
             $productModels[] = $this->apiResourcePropelTransformerService->modelToResource(Product::class, $product,
