@@ -14,6 +14,7 @@ namespace RecentlyViewed;
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Thelia\Module\BaseModule;
+use TheliaSmarty\Template\AbstractSmartyPlugin;
 
 /**
  * Class RecentlyViewed
@@ -33,9 +34,17 @@ class RecentlyViewed extends BaseModule
                 __DIR__.'/I18n',
                 __DIR__.'/I18n/*',
                 __DIR__.'/I18n/**/*',
+                __DIR__.'/Smarty',
             ])
             ->autowire(true)
             ->autoconfigure(true);
+
+        // The Smarty plugin is an optional integration: it needs TheliaSmarty, which Thelia 3 no longer ships by default.
+        if (class_exists(AbstractSmartyPlugin::class)) {
+            $servicesConfigurator->load(self::getModuleCode().'\\Smarty\\', __DIR__.'/Smarty')
+                ->autowire(true)
+                ->autoconfigure(true);
+        }
     }
 
 }

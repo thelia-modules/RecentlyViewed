@@ -1,0 +1,7 @@
+# Read by the module CI (PHPStan level 0 on published Thelia), paths relative to the module root.
+# The Smarty plugin is an optional integration: it extends classes of TheliaSmarty, which Thelia 3
+# no longer ships by default and which is registered only when present. It is not analysed here.
+parameters:
+    excludePaths:
+        analyse:
+            - Smarty
